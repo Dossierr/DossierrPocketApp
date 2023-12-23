@@ -1,14 +1,20 @@
-// ChatInput.js
-import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
 const ChatInput = ({ onSend }) => {
   const [inputText, setInputText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (inputText.trim() !== '') {
-      onSend(inputText);
+      setIsLoading(true);
+      await onSend(inputText);
       setInputText('');
+      
+      // Show activity indicator for 5 seconds
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 5000);
     }
   };
 
@@ -22,7 +28,11 @@ const ChatInput = ({ onSend }) => {
         onSubmitEditing={handleSend}
       />
       <TouchableOpacity style={styles.sendButton} onPress={handleSend}>
-        <Text style={styles.sendButtonText}>Send</Text>
+        {isLoading ? (
+          <ActivityIndicator color="white" />
+        ) : (
+          <Text style={styles.sendButtonText}>Send</Text>
+        )}
       </TouchableOpacity>
     </View>
   );

@@ -4,6 +4,11 @@ import { Modal, View, Image, Text, TouchableOpacity, StyleSheet, ScrollView } fr
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const GlassModal = ({ isVisible, onClose, cases, onSelectCase }) => {
+  const handleCaseSelection = (caseItem) => {
+    onSelectCase(caseItem);
+    onClose(); // Close the modal when a case is selected
+  };
+
   return (
     <Modal
       animationType="fade"
@@ -31,7 +36,7 @@ const GlassModal = ({ isVisible, onClose, cases, onSelectCase }) => {
                 <TouchableOpacity
                   key={caseItem.id}
                   style={styles.modalItem}
-                  onPress={() => onSelectCase(caseItem)}
+                  onPress={() => handleCaseSelection(caseItem)}
                 >
                   <Text>{caseItem.title}</Text>
                 </TouchableOpacity>
