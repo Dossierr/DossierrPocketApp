@@ -1,16 +1,29 @@
-import React from 'react';
+// ChatHeader.js
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import GlassModal from './GlassModal';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const ChatHeader = ({ title }) => {
+const ChatHeader = ({ title, cases, onSelectCase }) => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <View style={styles.headerRow}>
+        <Text style={styles.title}>{title}</Text>
       <View style={styles.sidebarButton}>
-        <TouchableOpacity onPress={() => console.log('Open Sidebar')}>
-          <Icon name="cog" size={30} color="white" />
+        <TouchableOpacity onPress={openModal}>
+          <Icon name="bars" size={30} color="white" />
         </TouchableOpacity>
       </View>
-      <Text style={styles.title}>{title}</Text>
+      <GlassModal isVisible={isModalOpen} onClose={closeModal} cases={cases} onSelectCase={onSelectCase} />
     </View>
   );
 };

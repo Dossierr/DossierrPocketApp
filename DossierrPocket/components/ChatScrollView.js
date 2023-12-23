@@ -22,8 +22,8 @@ const ChatScrollView = ({ messages }) => {
       }}
     >
       {messages.map((message, index) => (
-        <View key={index} style={message.sender === 'Friend' ? styles.friendChatBubble : styles.userChatBubble}>
-          <Text style={message.sender === 'Friend' ? styles.sender : styles.receiver}>{message.sender}:</Text>
+        <View key={index} style={message.sender === 'Harvey AI' ? styles.HarveyChatBubble : styles.userChatBubble}>
+          <Text style={message.sender === 'Harvey AI' ? styles.sender : styles.receiver}>{message.sender}:</Text>
           <Text style={styles.messageText}>{message.text}</Text>
         </View>
       ))}
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'flex-end',
   },
-  friendChatBubble: {
+  HarveyChatBubble: {
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     borderRadius: 10,
     padding: 10,
