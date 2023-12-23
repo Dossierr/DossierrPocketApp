@@ -13,11 +13,10 @@ jobs:
       - name: 🗂️ Move to folder
         run: cd DossierrPocket
 
-      - name: 🏗 Setup Node
-        uses: actions/checkout@v4
-        uses: actions/setup-node@v4
-          with:
-            node-version: 18
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
       - name: 🏗 Setup Expo and EAS
         uses: expo/expo-github-action@v7
